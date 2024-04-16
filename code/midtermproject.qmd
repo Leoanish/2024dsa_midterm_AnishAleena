@@ -30,10 +30,16 @@ To get you setup, you will need to:
   - Student 1 and 2 work together to update the README file. README files should explain what the repository is about, the goals of that project, who is working in it, and any other important details you may find.  
   
 # Introduction  
-Describe here the introduction of your problem. Consider this as a shortened version of your paper, where you will briefly discuss in 3-4 paragraphs what is the issue/gap in literature, and how the data you collected will help answer this gap.  
+
+Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. We propose the utilization of sensors to identify N stress in cotton, allowing for the precise and timely management of in-season N requirement.  
 
 # Hypothesis and objectives  
-Describe here your hypothesis, followed by your objectives. Make sure your hypothesis are testable and bold, and objectives are clear.  
+
+**Hypothesis:**  
+Our hypothesis suggests that sensor-based variable-rate N applications can reduce the overall amount of N applied while maintaining equivalent yields, thereby enhancing N use efficiency and partial profitability.  
+
+**Objectives:**  
+To contrast the effect of different side-dress fixed N rates and a sensor-based variable N rate on cotton yield, nitrogen use efficiency, and partial profit.  
 
 # Material and Methods  
 Describe here your overall material and methods as it pertains to the analysis you will conduct, including study description, site/setup description, what equipment was used, etc. just like you would in a paper. Make sure to clearly explain what was measured and how.
