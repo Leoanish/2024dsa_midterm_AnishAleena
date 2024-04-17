@@ -44,6 +44,27 @@ To contrast the effect of different side-dress fixed N rates and a sensor-based 
 # Material and Methods  
 Describe here your overall material and methods as it pertains to the analysis you will conduct, including study description, site/setup description, what equipment was used, etc. just like you would in a paper. Make sure to clearly explain what was measured and how.
 
+The study was carried out in Midville, Georgia (33.72°N, 83.30°W) on an irrigated field where cotton was planted on May 25, 2023. The experimental design was a randomized complete block design with four replications. Each experimental plot measured 9.14 m by 7.31 m (equivalent to 30 feet by 24 feet) and comprised of eight rows of cotton. The treatment design comprised a total of seven treatments including different side-dress N rates ranging from 0 to 128 kg N ha-1 and included one sensor-based treatment (Table 1).  
+```{r}
+library(kableExtra)
+
+treatment_lvl <- data.frame("Treatments" = c("0+0",
+                                      "100+0",
+                                      "36+24",
+                                      "36+54",
+                                      "36+84",
+                                      "36+114",
+                                      "36+VRN"
+                                           ))
+
+kable(treatment_lvl,format = "html", col.names = "Treatment \n (pre-plant + side-dress)",
+      align = "c", caption = "Table 1: Nitrogen application rates at preplant and side-dressing of cotton") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped")
+```
+
+
+
+
 ## Study design  
 Clearly describe your study design here, including treatment design (which factors and levels, the hierarchy among them, etc.), and your experimental design (number of reps/blocks, how was randomization performed, etc.), as we talked about in class.  
 
