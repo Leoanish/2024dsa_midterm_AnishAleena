@@ -30,40 +30,13 @@ To get you setup, you will need to:
   - Student 1 and 2 work together to update the README file. README files should explain what the repository is about, the goals of that project, who is working in it, and any other important details you may find.  
   
 # Introduction  
-
-Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. We propose the utilization of sensors to identify N stress in cotton, allowing for the precise and timely management of in-season N requirement.  
+Describe here the introduction of your problem. Consider this as a shortened version of your paper, where you will briefly discuss in 3-4 paragraphs what is the issue/gap in literature, and how the data you collected will help answer this gap.  
 
 # Hypothesis and objectives  
-
-**Hypothesis:**  
-Our hypothesis suggests that sensor-based variable-rate N applications can reduce the overall amount of N applied while maintaining equivalent yields, thereby enhancing N use efficiency and partial profitability.  
-
-**Objectives:**  
-To contrast the effect of different side-dress fixed N rates and a sensor-based variable N rate on cotton yield, nitrogen use efficiency, and partial profit.  
+Describe here your hypothesis, followed by your objectives. Make sure your hypothesis are testable and bold, and objectives are clear.  
 
 # Material and Methods  
 Describe here your overall material and methods as it pertains to the analysis you will conduct, including study description, site/setup description, what equipment was used, etc. just like you would in a paper. Make sure to clearly explain what was measured and how.
-
-The study was carried out in Midville, Georgia (33.72°N, 83.30°W) on an irrigated field where cotton was planted on May 25, 2023. The experimental design was a randomized complete block design with four replications. Each experimental plot measured 9.14 m by 7.31 m (equivalent to 30 feet by 24 feet) and comprised of eight rows of cotton. The treatment design comprised a total of seven treatments including different side-dress N rates ranging from 0 to 128 kg N ha-1 and included one sensor-based treatment (Table 1).  
-```{r}
-library(kableExtra)
-
-treatment_lvl <- data.frame("Treatments" = c("0+0",
-                                      "100+0",
-                                      "36+24",
-                                      "36+54",
-                                      "36+84",
-                                      "36+114",
-                                      "36+VRN"
-                                           ))
-
-kable(treatment_lvl,format = "html", col.names = "Treatment \n (pre-plant + side-dress)",
-      align = "c", caption = "Table 1: Nitrogen application rates at preplant and side-dressing of cotton") %>% 
-  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped")
-```
-
-
-
 
 ## Study design  
 Clearly describe your study design here, including treatment design (which factors and levels, the hierarchy among them, etc.), and your experimental design (number of reps/blocks, how was randomization performed, etc.), as we talked about in class.  
@@ -73,13 +46,174 @@ Clearly describe your study design here, including treatment design (which facto
 Describe here your statistical analysis, including what type of ANOVA model you ran (based on the design above), what was your response variable, what were your explanatory variables and how were the explanatory variables treated (random or fixed). Provide your alpha level. Explain which function from which package you used to analyze this data. Explain how you checked linear model assumptions and whether or not they were met. Overall, make sure you explain in sufficient detail that, if given your data, a knowledgeable person would be able to reproduce your analysis exactly.  
 
 # Results  
-Here is where the coding is going to happen, and it will be completely up to you. Include under this section as many sub-sections (using ##) and as many chunks needed to create the analytical workflow for your analysis, starting at loading packages and data, wrangling, EDA, modeling, assumptions checking, ANOVA table, means, pairwise comparisons, and final publication-quality plot.  
+Here is where the coding is going to happen, and it will be completely up to you. Include under this section as many sub-sections (using ##) and as many chunks needed to create the analytical workflow for your analysis, starting at loading packages and data, wrangling, EDA, modeling, assumptions checking, ANOVA table, means, pairwise comparisons, and final publication-quality plot. 
 
 Make sure to run a model that reflects your study design. Even if your study design does not include one of the designs covered in class, you are still expected to run the most appropriate model. If you need help for references, let me know.  
 
 Before each chunk, describe the steps being performed in that chunk. For example, "Here I will load the data".  
 
 If a chunk produces output, like printing a data frame, statistical summary, a plot, ANOVA table, etc., make sure to write text interpreting what you see and how you can/will use that information to move forward to the next steps in the workflow.  
+
+## Setup
+
+```{r setup}
+# Loading libraries
+library(car) # for Anova function
+library(dplyr) # wrangling
+library(tidyr) # wrangling
+library(tidyverse) # for data wrangling and plotting
+library(ggplot2) # for plotting system for creating graphics
+library(lme4) # to fit linear and generalized linear mixed-effects models
+library(janitor) # to clean data
+library(readxl) # import Excel files into R
+library(emmeans) # for model mean extraction
+library(multcomp) # for pairwise comparison letter display
+library(broom.mixed) # summarize mixed models and extract residuals
+library(ggpmisc) # extensions and utilities for ggplot2
+#install.packages("shadowtext")
+library(shadowtext) # create shadowed text for visualizations
+```
+
+##Importing Data
+```{r data import}
+yield_mid <- read_xlsx("../data/Yield Midville.xlsx") %>% 
+  clean_names()
+
+yield_mid
+
+info_mid <- read_csv("../data/info_mid_all_rates.csv") %>% 
+  rename(plots = plot_ids)
+
+info_mid
+
+ginning_pct <- read_xlsx("../data/Midville ginning percentage 2023.xlsx")[-1,] %>% 
+  clean_names() %>% 
+  dplyr::select(plots, gt)
+
+ginning_pct
+```
+
+##Data Visualization
+```{r}
+yield_mid %>% 
+  ggplot()+
+  geom_density(aes(x = yield_kg))
+```
+##EDA Tables
+```{r}
+summary(yield_mid)
+```
+
+```{r}
+glimpse(yield_mid_merged)
+```
+
+##Data Merging and Wrangling
+```{r}
+yield_mid_merged <- yield_mid %>% 
+  merge(info_mid, by = "plots") %>% 
+  dplyr::select(plots, treatment, yield_kg, blocks, total_lbac) %>% 
+  mutate(plot_yield_kg = yield_kg*4,
+         kgsqft = plot_yield_kg/720,
+         kgsqm = kgsqft/0.092903,
+         kgha = kgsqm*10000) %>% 
+  mutate_at(.vars = c("treatment", "blocks"), .funs = factor) %>% 
+  mutate(treatment = factor(treatment,levels = c("0+0",
+                                      "100+0",
+                                      "36+24",
+                                      "36+54",
+                                      "36+84",
+                                      "36+114",
+                                      "36+VRN")))
+
+summary(yield_mid_merged)
+```
+
+```{r}
+lint_yield <- yield_mid_merged %>% 
+  merge(ginning_pct, by = "plots") %>% 
+  mutate(lint_kgha = kgha*gt) %>% 
+  dplyr::select(plots, treatment, blocks, lint_kgha, total_lbac)
+
+#write_csv(lint_yield, "../output/lint_yield_mid.csv")
+```
+
+##Statistical Model
+```{r}
+model <- lmer(lint_kgha ~ treatment + (1|blocks), data = lint_yield)
+
+Anova(model, type = 3)
+
+summary(model)
+
+emmeans <- emmeans(model, ~treatment)
+
+pwc <- cld(emmeans, adjust = "none",
+           reversed = T, Letters = letters) %>% 
+  as.data.frame() %>% 
+  mutate(letters = trimws(.group))
+```
+
+##Ginning Turnout Analysis
+```{r}
+gt_df <- yield_mid_merged %>% 
+  merge(ginning_pct, by = "plots") %>% 
+  dplyr::select(gt, treatment, blocks)
+```
+
+
+```{r}
+model_gt <- lmer(gt ~ treatment + (1|blocks), data = gt_df)
+
+Anova(model_gt, type = 3)
+
+summary(model_gt)
+
+emmeans_gt <- emmeans(model_gt, ~treatment)
+
+pwc_gt <- cld(emmeans_gt, adjust = "none",
+           reversed = T, Letters = letters) %>% 
+  as.data.frame() %>% 
+  mutate(letters = trimws(.group))
+```
+
+
+
+```{r}
+lint_yield %>% 
+  ggplot()+
+  geom_boxplot(aes(x = treatment, y = lint_kgha, fill = treatment), outlier.shape = NA, alpha = 0.7)+
+  geom_point(data = pwc, aes(x = treatment, y = emmean, color = treatment))+
+  geom_shadowtext(data = pwc, aes(x = treatment, y = emmean , label = letters),show.legend = F, bg = "black",  color = "white", size = 4.5)+
+  labs(x = expression(bold(paste("Treatments (kg ha"^-1, ")"))),
+       y = expression(bold(paste("Lint Yield (kg ha"^-1, ")"))),
+       fill = "Treatments",
+       title = "Lint Yield Affected by N Treatments in\n Midville")+
+  theme_gray()+
+  scale_x_discrete(labels = c("0+0",
+                              "112+0",
+                              "40+26",
+                              "40+60",
+                              "40+94",
+                              "40+128",
+                              "40+VRN"))+
+  scale_fill_brewer(type = "seq", palette = "YlOrBr")+
+  scale_y_continuous(breaks = seq(500, 3000, 250))+
+  guides(color = F, fill = F)+
+  theme(panel.background = element_rect(fill = "gray80"),
+        panel.grid = element_blank(),
+        legend.position = c(0.075, 0.82),
+        legend.background = element_rect(fill = "gray88"),
+        legend.key.height = unit(5.5, "mm"),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(size = 20, face = "bold", hjust = 0.5))
+
+ggsave("../output/midville_lint_yield.png",
+       height = 6, 
+       width = 8)
+```
+
+##Interpretation: 
 
 # Team work in GitHub  
 Whether you are working with your future-self or as duos, make sure to stage, commit, and push after finishing each of the sub-sections above. When committing, write commit messages that are short and descriptive (e.g., finished wrangling).  
