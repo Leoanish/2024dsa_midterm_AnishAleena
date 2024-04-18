@@ -32,18 +32,62 @@ To get you setup, you will need to:
 # Introduction  
 Describe here the introduction of your problem. Consider this as a shortened version of your paper, where you will briefly discuss in 3-4 paragraphs what is the issue/gap in literature, and how the data you collected will help answer this gap.  
 
+**Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. We propose the utilization of sensors to identify N stress in cotton, allowing for the precise and timely management of in-season N requirement.  **
+
 # Hypothesis and objectives  
 Describe here your hypothesis, followed by your objectives. Make sure your hypothesis are testable and bold, and objectives are clear.  
+
+*Hypothesis:* 
+**Our hypothesis suggests that sensor-based variable-rate N applications can reduce the overall amount of N applied while maintaining equivalent yields, thereby enhancing partial profitability.**
+
+*Objectives:*
+**To contrast the effect of different side-dress fixed N rates and a sensor-based variable N rate on cotton yield, nitrogen use efficiency, and partial profit. ** 
 
 # Material and Methods  
 Describe here your overall material and methods as it pertains to the analysis you will conduct, including study description, site/setup description, what equipment was used, etc. just like you would in a paper. Make sure to clearly explain what was measured and how.
 
+**The study was carried out in Midville, Georgia (33.72°N, 83.30°W) on an irrigated field where cotton was planted on May 25, 2023. Each experimental plot measured 9.14 m by 7.31 m (equivalent to 30 feet by 24 feet) and comprised of eight rows of cotton. The treatment design comprised a total of seven treatments including different side-dress N rates ranging from 0 to 128 kg N ha-1 and included one sensor-based treatment.** 
+
+**The ACS-435 Crop Circle (Holland Scientific, Lincoln, NE), an active crop canopy sensor, was deployed for data collection and retrieval of NDRE index value from each plot. This index, obtained at the first square growth stage just before N application, involved handheld scanning of the third and fourth rows of each plot. Plot average NDRE values were then derived and used with the algorithm to determine plot-specific N rates which were then applied using a tractor-pulled sprayer. Each plot was individually harvested 170 days after planting. Cotton lint yield was determined after processing the samples by separating lint from seeds. **  
+
 ## Study design  
-Clearly describe your study design here, including treatment design (which factors and levels, the hierarchy among them, etc.), and your experimental design (number of reps/blocks, how was randomization performed, etc.), as we talked about in class.  
+Clearly describe your study design here, including treatment design (which factors and levels, the hierarchy among them, etc.), and your experimental design (number of reps/blocks, how was randomization performed, etc.), as we talked about in class. 
+
+ **The treatment design comprised different nitrogen rates with a total of seven treatments in the form of pre-plat and side dress 0 to 128 kg N ha-1. Out of 7 treatments there were one control, one variable rate treatment and rest five were fixed treatments. The variable rate treatment is also known as sensor-based treatment, as based on the sensor reading our N application rate was defined (Table 1).**
+ 
+ **Similarly, as the experimental field was heterogeneous in nature so, randomized complete block design was performed with 4 replications/blocks. Restrictive randomization was performed for all 7 treatments within the block such that each treatment appear once in each replications. **
+
+```{r include = F}
+library(kableExtra)
+
+treatment_lvl <- data.frame("Treatments" = c("0+0",
+                                      "100+0",
+                                      "36+24",
+                                      "36+54",
+                                      "36+84",
+                                      "36+114",
+                                      "36+VRN"
+                                           ))
+```
+
+```{r echo = F}
+kable(treatment_lvl,format = "html", col.names = "Treatment\n(pre-plant + side-dress)",
+      align = "c", caption = "Table 1: Nitrogen application rates at preplant and side-dressing of cotton") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
+                            wraptable_width = "float", position = "center")
+```
 
 
 ## Statistical analysis  
 Describe here your statistical analysis, including what type of ANOVA model you ran (based on the design above), what was your response variable, what were your explanatory variables and how were the explanatory variables treated (random or fixed). Provide your alpha level. Explain which function from which package you used to analyze this data. Explain how you checked linear model assumptions and whether or not they were met. Overall, make sure you explain in sufficient detail that, if given your data, a knowledgeable person would be able to reproduce your analysis exactly.  
+
+**The response variables of lint yield was analyzed with a mixed-effect analysis of variance (ANOVA) model utilizing R software (version 4.3.1). Different N rates were taken as fixed effect and block was taken as random effect. A significance level of α = 0.05 was used for determining significant terms in the ANOVA and for pairwise comparisons. lmer function from lme4 package was used to run the analysis.**
+
+**Four different model assumptions were checked based on the residuals which are:**
+**1. Residual Independence**
+**2. Residual homoscadecity**
+**3. Residual outliers**
+**4. Residual normality**
 
 # Results  
 Here is where the coding is going to happen, and it will be completely up to you. Include under this section as many sub-sections (using ##) and as many chunks needed to create the analytical workflow for your analysis, starting at loading packages and data, wrangling, EDA, modeling, assumptions checking, ANOVA table, means, pairwise comparisons, and final publication-quality plot. 
