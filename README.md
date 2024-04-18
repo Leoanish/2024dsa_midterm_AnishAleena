@@ -1,5 +1,3 @@
-Midterm Project
-
 **About the Project:**
 Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. In this context, the proposal advocates for the adoption of sensor technology to detect N stress in cotton plants, enabling precise and timely adjustments to in-season N requirements. The data we collect from the sensor can help us better understand the potentiality of these sensors to detect N stress and compare  the sensor based approach with the traditional approach.
 
