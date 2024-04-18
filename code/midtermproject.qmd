@@ -1,13 +1,13 @@
 ---
 title: "Mid-term project instructions"
-author: "FULL NAME STUDENT 1 & FULL NAME STUDENT 2"
+author: "Anish Bhattarai & Aleena Rayamajhi"
 format:
   html:
     code-fold: false
     embed-resources: true
     toc: true
     number-sections: true
-    theme: cerulean
+    theme: "cosmo"
 ---
 
 # Mid-term project GitHub repository URL:  
@@ -100,7 +100,7 @@ If a chunk produces output, like printing a data frame, statistical summary, a p
 
 ## Setup
 
-```{r setup}
+```{r setup, warning=FALSE, message=FALSE}
 # Loading libraries
 library(car) # for Anova function
 library(dplyr) # wrangling
@@ -118,41 +118,40 @@ library(ggpmisc) # extensions and utilities for ggplot2
 library(shadowtext) # create shadowed text for visualizations
 ```
 
-##Importing Data
+```{r include = F}
+knitr::opts_chunk$set(message = F, warning = F)
+
+my_theme <- theme(plot.background = element_blank(),
+                  panel.background = element_rect(fill = "gray80"),
+                  panel.grid = element_blank(),
+                  plot.title = element_text(hjust = 0.5, size = 18))
+```
+
+
+## Importing Data
 ```{r data import}
 yield_mid <- read_xlsx("../data/Yield Midville.xlsx") %>% 
   clean_names()
 
-yield_mid
-
 info_mid <- read_csv("../data/info_mid_all_rates.csv") %>% 
   rename(plots = plot_ids)
-
-info_mid
 
 ginning_pct <- read_xlsx("../data/Midville ginning percentage 2023.xlsx")[-1,] %>% 
   clean_names() %>% 
   dplyr::select(plots, gt)
-
-ginning_pct
 ```
 
-##Data Visualization
-```{r}
-yield_mid %>% 
-  ggplot()+
-  geom_density(aes(x = yield_kg))
-```
-##EDA Tables
+
+## EDA Tables
 ```{r}
 summary(yield_mid)
 ```
 
 ```{r}
-glimpse(yield_mid_merged)
+glimpse(yield_mid)
 ```
 
-##Data Merging and Wrangling
+## Data Merging and Wrangling
 ```{r}
 yield_mid_merged <- yield_mid %>% 
   merge(info_mid, by = "plots") %>% 
@@ -170,26 +169,44 @@ yield_mid_merged <- yield_mid %>%
                                       "36+114",
                                       "36+VRN")))
 
-summary(yield_mid_merged)
+head(yield_mid_merged, 6)
 ```
 
 ```{r}
+glimpse(yield_mid_merged)
+```
+## Lint yield calculation
+
+```{r}
+# Lint yield is the total fiber yield of the cotton after the seed are removed and the process is known as ginning.
+
 lint_yield <- yield_mid_merged %>% 
   merge(ginning_pct, by = "plots") %>% 
   mutate(lint_kgha = kgha*gt) %>% 
   dplyr::select(plots, treatment, blocks, lint_kgha, total_lbac)
+```
 
-#write_csv(lint_yield, "../output/lint_yield_mid.csv")
+```{r}
+lint_yield %>% 
+  ggplot()+
+  geom_density(aes(x = lint_kgha), fill = "red", alpha = 0.4)+
+  labs(x = "Lint Yield (kg/ha)",
+       y = "Density")+
+  my_theme
 ```
 
 ##Statistical Model
 ```{r}
 model <- lmer(lint_kgha ~ treatment + (1|blocks), data = lint_yield)
 
-Anova(model, type = 3)
-
 summary(model)
+```
 
+```{r}
+Anova(model, type = 3)
+```
+
+```{r}
 emmeans <- emmeans(model, ~treatment)
 
 pwc <- cld(emmeans, adjust = "none",
@@ -197,31 +214,6 @@ pwc <- cld(emmeans, adjust = "none",
   as.data.frame() %>% 
   mutate(letters = trimws(.group))
 ```
-
-##Ginning Turnout Analysis
-```{r}
-gt_df <- yield_mid_merged %>% 
-  merge(ginning_pct, by = "plots") %>% 
-  dplyr::select(gt, treatment, blocks)
-```
-
-
-```{r}
-model_gt <- lmer(gt ~ treatment + (1|blocks), data = gt_df)
-
-Anova(model_gt, type = 3)
-
-summary(model_gt)
-
-emmeans_gt <- emmeans(model_gt, ~treatment)
-
-pwc_gt <- cld(emmeans_gt, adjust = "none",
-           reversed = T, Letters = letters) %>% 
-  as.data.frame() %>% 
-  mutate(letters = trimws(.group))
-```
-
-
 
 ```{r}
 lint_yield %>% 
