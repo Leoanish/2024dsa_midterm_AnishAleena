@@ -239,8 +239,7 @@ model <- lmer(lint_kgha ~ treatment + (1|blocks), data = lint_yield)
 summary(model)
 ```
 
-
-
+**A linear mixed effect model was ran for the data as the experimental design was randomized complete block design with treatments as fixed and blocks as random effects.**
 ### Checking Anova
 
 ```{r}
@@ -255,8 +254,7 @@ kable(anova, format = "html", col.names = c("Terms", "Statistic", "Df", "p-value
   kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
                             wraptable_width = "float", position = "center")
 ```
-
-
+**As per our significance level of 0.05 the treatments here are significantly different from each other as the p-value is 0.0132, which is lower than our set threshold for significance level.**
 
 ```{r}
 rcbd_mix_resid <- augment(model) %>%
