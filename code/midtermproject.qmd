@@ -10,7 +10,7 @@ format:
     theme: "cosmo"
 ---
 
-# Mid-term project GitHub repository URL:  
+# Mid-term project GitHub repository URL:  https://github.com/Leoanish/2024dsa_midterm_AnishAleena/
 
 Paste here the URL of the GitHub project (after going through the instruction steps)
 
@@ -60,7 +60,8 @@ Clearly describe your study design here, including treatment design (which facto
  **Similarly, as the experimental field was heterogeneous in nature so, randomized complete block design was performed with $4$ replications/blocks. Restrictive randomization was performed for all $7$ treatments within the block such that each treatment appear once in each replications. **
 
 ```{r include = F}
-library(kableExtra)
+#install.packages("kableExtra")
+library(kableExtra) # adds various features to customize and enhance the appearance of tables 
 
 treatment_lvl <- data.frame("Treatments" = c("0+0",
                                       "100+0",
@@ -89,9 +90,9 @@ Describe here your statistical analysis, including what type of ANOVA model you 
 
 **1. Residual independence**. 
 
-**2. Residual homoscadecity**.
+**2. Residual homoscedasticity**.
 
-**3. Residual outliers**. 
+**3. Residual outlier**. 
 
 **4. Residual normality**. 
 
@@ -200,7 +201,7 @@ kable(first6, format = "html", col.names = c("Plots", "Treatment", "Blocks", "To
 ```{r}
 # Lint yield is the total fiber yield of the cotton after the seed are removed and the process is known as ginning.
 lint_yield <- yield_mid_merged %>% 
-  mutate(lint_kgha = kgha*gt) %>% # calculating the lint yield muktiplying the total yield (seed cotton) by ginning turnout, giving us yield for fiber only.
+  mutate(lint_kgha = kgha*gt) %>% # calculating the lint yield multiplying the total yield (seed cotton) by ginning turnout, giving us yield for fiber only.
   dplyr::select(plots, treatment, blocks, total_lbac, lint_kgha)
 
 lint_first6 <- head(lint_yield, 6)
@@ -286,7 +287,7 @@ randeff_rep <- ranef(model)$blocks
 randeff_rep
 ```
 
-For random effects with so few levels (i.e., 4 since that's the number of blocks), the QQ plot is one of the only ways to check for assumptions on random effects.  
+**For random effects with so few levels (i.e., 4 since that's the number of blocks), the QQ plot is one of the only ways to check for assumptions on random effects.**  
 
 
 ```{r, fig.height=6, fig.width=9}
@@ -498,6 +499,10 @@ mid_w_info_f %>%
 
 ## Interpretation of Result
 
+Treatment rates, applied both at planting and at side-dress, are shown on Figure 1. Fixed side-dress rates ranged from 0 to 128 kg N ha-1. Sensor-based VRN was 21kg N ha-1 at side dressing when averaged across all VRN plots and ranged from 0 to 37 kg N ha-1 on a plot basis. The recommended side-dress application rate of 21 kg N ha-1 from sensor-based N treatment was 78% less than the conventional recommended rate of 134 (40 + 94) kg N ha-1(Figure 2).
+
+
+Mean lint yield ranged from 1500 to 2500 kg ha1. The highest yield was obtained from treatment 112+0 kg N ha-1, while lowest from 0+0 kg N ha-1. Similarly, no statistical difference in yield was found among the treatments, 40+VRN, 112+0, 40+26, 40+60, 40+128 kg N ha-1. Even with the reduced recommended N rate, sensor-based N (40+VRN) maintained similar lint yield compared to all fixed side-dress rates.  This suggests that the sensor-based nitrogen application strategy was effective in maintaining lint yield at a level similar to that achieved with conventional fixed side-dress rates. (Figure 1).
 
 
 # Team work in GitHub  
