@@ -32,30 +32,32 @@ To get you setup, you will need to:
 # Introduction  
 Describe here the introduction of your problem. Consider this as a shortened version of your paper, where you will briefly discuss in 3-4 paragraphs what is the issue/gap in literature, and how the data you collected will help answer this gap.  
 
-**Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. We propose the utilization of sensors to identify N stress in cotton, allowing for the precise and timely management of in-season N requirement.  **
+**Nitrogen (N) plays a critical role as a mineral nutrient essential for the growth and yield of cotton. Traditionally, Georgia cotton growers have relied on a standardized N application approach, which carries both benefits and limitations. While this method simplifies field management by applying a consistent dosage throughout the area, it fails to account for the inherent spatial and temporal variability within the field. Additionally, uncertainty persists regarding the optimal quantity of N fertilizer required each year, further complicating matters. To address these challenges, innovative strategies leveraging advanced sensor technology, variable-rate N applications, and real-time monitoring of crop N status have emerged as crucial solutions. In this context, the proposal advocates for the adoption of sensor technology to detect N stress in cotton plants, enabling precise and timely adjustments to in-season N requirements. The data we collect from the sensor can help us better understand the potentiality of these sensors to detect N stress and compare  the sensor based approach with the traditional approach.**
 
 # Hypothesis and objectives  
 Describe here your hypothesis, followed by your objectives. Make sure your hypothesis are testable and bold, and objectives are clear.  
 
-*Hypothesis:* 
-**Our hypothesis suggests that sensor-based variable-rate N applications can reduce the overall amount of N applied while maintaining equivalent yields, thereby enhancing partial profitability.**
+*Hypothesis:*
+
+**Our hypothesis suggests that sensor-based variable-rate N applications can reduce the overall amount of N applied while maintaining equivalent yields.**
 
 *Objectives:*
-**To contrast the effect of different side-dress fixed N rates and a sensor-based variable N rate on cotton yield, nitrogen use efficiency, and partial profit. ** 
+
+**To contrast the effect of different side-dress fixed N rates and a sensor-based variable N rate on cotton yield.** 
 
 # Material and Methods  
 Describe here your overall material and methods as it pertains to the analysis you will conduct, including study description, site/setup description, what equipment was used, etc. just like you would in a paper. Make sure to clearly explain what was measured and how.
 
-**The study was carried out in Midville, Georgia (33.72°N, 83.30°W) on an irrigated field where cotton was planted on May 25, 2023. Each experimental plot measured 9.14 m by 7.31 m (equivalent to 30 feet by 24 feet) and comprised of eight rows of cotton. The treatment design comprised a total of seven treatments including different side-dress N rates ranging from 0 to 128 kg N ha-1 and included one sensor-based treatment.** 
+**The study was conducted in Midville, Georgia ($33.72^\circ$N, $83.30^\circ$W) on an irrigated field where cotton was planted on May 25, 2023. Each experimental plot measured $9.14, \text{m}$ by $7.31, \text{m}$ (equivalent to $30$ feet by $24$ feet) and comprised of eight rows of cotton. The treatment design included a total of seven treatments, involving different side-dress N rates ranging from $0$ to $128, \text{kg N}, \text{ha}^{-1}$, and included one sensor-based treatment.**
 
-**The ACS-435 Crop Circle (Holland Scientific, Lincoln, NE), an active crop canopy sensor, was deployed for data collection and retrieval of NDRE index value from each plot. This index, obtained at the first square growth stage just before N application, involved handheld scanning of the third and fourth rows of each plot. Plot average NDRE values were then derived and used with the algorithm to determine plot-specific N rates which were then applied using a tractor-pulled sprayer. Each plot was individually harvested 170 days after planting. Cotton lint yield was determined after processing the samples by separating lint from seeds. **  
+**The ACS-435 Crop Circle (Holland Scientific, Lincoln, NE), an active crop canopy sensor, was utilized for data collection and retrieval of NDRE index values from each plot. This index, obtained at the first square growth stage just before N application, involved handheld scanning of the third and fourth rows of each plot. Plot average NDRE values were then derived and utilized with the algorithm to determine plot-specific N rates, which were subsequently applied using a tractor-pulled sprayer. Each plot was individually harvested 170 days after planting. Cotton lint yield was determined post-processing the samples by separating lint from seeds, a process known as ginning. The harvested cotton from the field is seed-cotton (seed + cotton fiber). After ginning, the seed-cotton is separated into cotton fiber and seed, with the latter being discarded, and the fiber yield representing the lint yield (cotton fiber - seed). **  
 
 ## Study design  
 Clearly describe your study design here, including treatment design (which factors and levels, the hierarchy among them, etc.), and your experimental design (number of reps/blocks, how was randomization performed, etc.), as we talked about in class. 
 
- **The treatment design comprised different nitrogen rates with a total of seven treatments in the form of pre-plat and side dress 0 to 128 kg N ha-1. Out of 7 treatments there were one control, one variable rate treatment and rest five were fixed treatments. The variable rate treatment is also known as sensor-based treatment, as based on the sensor reading our N application rate was defined (Table 1).**
+ **The treatment design comprised different nitrogen rates with a total of seven treatments in the form of pre-plat and side dress $0$ to $128 kg N ha^{-1}$. Out of $7$ treatments there were one control, one variable rate treatment and rest five were fixed treatments. The variable rate treatment is also known as sensor-based treatment, as based on the sensor reading our N application rate was defined (Table 1).**
  
- **Similarly, as the experimental field was heterogeneous in nature so, randomized complete block design was performed with 4 replications/blocks. Restrictive randomization was performed for all 7 treatments within the block such that each treatment appear once in each replications. **
+ **Similarly, as the experimental field was heterogeneous in nature so, randomized complete block design was performed with $4$ replications/blocks. Restrictive randomization was performed for all $7$ treatments within the block such that each treatment appear once in each replications. **
 
 ```{r include = F}
 library(kableExtra)
@@ -81,13 +83,18 @@ kable(treatment_lvl,format = "html", col.names = "Treatment\n(pre-plant + side-d
 ## Statistical analysis  
 Describe here your statistical analysis, including what type of ANOVA model you ran (based on the design above), what was your response variable, what were your explanatory variables and how were the explanatory variables treated (random or fixed). Provide your alpha level. Explain which function from which package you used to analyze this data. Explain how you checked linear model assumptions and whether or not they were met. Overall, make sure you explain in sufficient detail that, if given your data, a knowledgeable person would be able to reproduce your analysis exactly.  
 
-**The response variables of lint yield was analyzed with a mixed-effect analysis of variance (ANOVA) model utilizing R software (version 4.3.1). Different N rates were taken as fixed effect and block was taken as random effect. A significance level of α = 0.05 was used for determining significant terms in the ANOVA and for pairwise comparisons. lmer function from lme4 package was used to run the analysis.**
+**The response variables of lint yield was analyzed with a mixed-effect analysis of variance (ANOVA) model utilizing R software (version 4.3.1). Different N rates were taken as fixed effect and block was taken as random effect. A significance level of $α = 0.05$ was used for determining significant terms in the ANOVA and for pairwise comparisons. Function lmer from lme4 package was used to run the analysis.**
 
 **Four different model assumptions were checked based on the residuals which are:**
-**1. Residual Independence**
-**2. Residual homoscadecity**
-**3. Residual outliers**
-**4. Residual normality**
+
+**1. Residual independence**. 
+
+**2. Residual homoscadecity**.
+
+**3. Residual outliers**. 
+
+**4. Residual normality**. 
+
 
 # Results  
 Here is where the coding is going to happen, and it will be completely up to you. Include under this section as many sub-sections (using ##) and as many chunks needed to create the analytical workflow for your analysis, starting at loading packages and data, wrangling, EDA, modeling, assumptions checking, ANOVA table, means, pairwise comparisons, and final publication-quality plot. 
@@ -100,7 +107,7 @@ If a chunk produces output, like printing a data frame, statistical summary, a p
 
 ## Setup
 
-```{r setup, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Loading libraries
 library(car) # for Anova function
 library(dplyr) # wrangling
@@ -113,9 +120,9 @@ library(readxl) # import Excel files into R
 library(emmeans) # for model mean extraction
 library(multcomp) # for pairwise comparison letter display
 library(broom.mixed) # summarize mixed models and extract residuals
-library(ggpmisc) # extensions and utilities for ggplot2
-#install.packages("shadowtext")
 library(shadowtext) # create shadowed text for visualizations
+library(kableExtra) # creating table 
+library(ggthemes) # extra themes for ggplot
 ```
 
 ```{r include = F}
@@ -129,64 +136,87 @@ my_theme <- theme(plot.background = element_blank(),
 
 
 ## Importing Data
-```{r data import}
+
+```{r}
 yield_mid <- read_xlsx("../data/Yield Midville.xlsx") %>% 
-  clean_names()
+  clean_names() # importing the yield file. Here yield is the raw yield (seed cotton) harvested from field from 2 rows of each plot.
 
 info_mid <- read_csv("../data/info_mid_all_rates.csv") %>% 
-  rename(plots = plot_ids)
-
-ginning_pct <- read_xlsx("../data/Midville ginning percentage 2023.xlsx")[-1,] %>% 
+  rename(plots = plot_ids) # importing the info file for midville that contains all the treatment information and block of the treatments.
+ 
+ginning_pct <- read_xlsx("../data/Midville ginning percentage 2023.xlsx")[-1,] %>%  # data for ginning percentage, it is the percentage of fiber or lint extracted from the seed-cotton after removing the seed. Seed cotton is what we harvest from the field.
   clean_names() %>% 
   dplyr::select(plots, gt)
+
+file_list <- list(yield_mid, info_mid, ginning_pct) # Making a list of the 3 imported files
 ```
 
 
 ## EDA Tables
-```{r}
-summary(yield_mid)
-```
 
 ```{r}
-glimpse(yield_mid)
+initial_merged_df <- Reduce(function(df1,df2) merge(df1, df2, by = "plots"), file_list) # merging all three imported files at once as all of them has one same column which is plots.
+
+glimpse(initial_merged_df)
+```
+
+**Taking a first look at all the columns of our data we can observe some variables need to be properly formatted before we begin our exploration. For example, plots, blocks which are now treated as numerical while they must be categorical in nature.**
+
+```{r}
+summary(initial_merged_df)
 ```
 
 ## Data Merging and Wrangling
 ```{r}
-yield_mid_merged <- yield_mid %>% 
-  merge(info_mid, by = "plots") %>% 
-  dplyr::select(plots, treatment, yield_kg, blocks, total_lbac) %>% 
-  mutate(plot_yield_kg = yield_kg*4,
-         kgsqft = plot_yield_kg/720,
-         kgsqm = kgsqft/0.092903,
-         kgha = kgsqm*10000) %>% 
-  mutate_at(.vars = c("treatment", "blocks"), .funs = factor) %>% 
+yield_mid_merged <- initial_merged_df %>% 
+  dplyr::select(plots, treatment, yield_kg, blocks, total_lbac, gt) %>% 
+  mutate(plot_yield_kg = yield_kg*4, # yield_kg is yield per 2 rows, we have 8 rows in a plot so multiplying by 4 to get plot yield.
+         kgsqft = plot_yield_kg/720, # calculating the per sq ft area yield as the plot area is 720 sqft.
+         kgsqm = kgsqft/0.092903, # converting square feet (sqft) to square meter (sqm)
+         kgha = kgsqm*10000) %>%  # converting to yield in kg per hacter.
+  mutate_at(.vars = c("treatment", "blocks"), .funs = factor) %>% # changing the variables in their proper format
   mutate(treatment = factor(treatment,levels = c("0+0",
                                       "100+0",
                                       "36+24",
                                       "36+54",
                                       "36+84",
                                       "36+114",
-                                      "36+VRN")))
+                                      "36+VRN"))) %>% 
+  dplyr::select(-c(yield_kg, plot_yield_kg, kgsqft, kgsqm))
 
-head(yield_mid_merged, 6)
+first6 <- head(yield_mid_merged, 6)
 ```
 
-```{r}
-glimpse(yield_mid_merged)
+```{r echo = F}
+kable(first6, format = "html", col.names = c("Plots", "Treatment", "Blocks", "Total applied N (lb/ac)", "Ginning turnout", "Total Yield (kg/ha)"), digits = 3,
+      align = "c", caption = "Table 2: First 6 rows of seed cotton yield data obtained from the experimental field") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
+                            wraptable_width = "float", position = "center")
 ```
+
+
 ## Lint yield calculation
 
 ```{r}
 # Lint yield is the total fiber yield of the cotton after the seed are removed and the process is known as ginning.
-
 lint_yield <- yield_mid_merged %>% 
-  merge(ginning_pct, by = "plots") %>% 
-  mutate(lint_kgha = kgha*gt) %>% 
-  dplyr::select(plots, treatment, blocks, lint_kgha, total_lbac)
+  mutate(lint_kgha = kgha*gt) %>% # calculating the lint yield muktiplying the total yield (seed cotton) by ginning turnout, giving us yield for fiber only.
+  dplyr::select(plots, treatment, blocks, total_lbac, lint_kgha)
+
+lint_first6 <- head(lint_yield, 6)
 ```
 
-```{r}
+```{r echo=F}
+kable(lint_first6, format = "html", col.names = c("Plots", "Treatment", "Blocks", "Total applied N (lb/ac)", "Total lint yield (kg/ha)"), digits = 3,
+      align = "c", caption = "Table 3: First 6 rows of lint (cotton fiber - seed) yield data obtained from the experimental field") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
+                            wraptable_width = "float", position = "center")
+```
+
+
+## Data visualization
+
+```{r fig.height=6, fig.width=9}
 lint_yield %>% 
   ggplot()+
   geom_density(aes(x = lint_kgha), fill = "red", alpha = 0.4)+
@@ -195,25 +225,145 @@ lint_yield %>%
   my_theme
 ```
 
-##Statistical Model
+**Looking at the density plot above the lint yield is ranging from $1500 kg ha^{-1}$ to $2500 kg ha^{-1}$ which is normal in case of cotton so, we confirm no anomalies with the data.**
+
+## Statistical Model
+
+### Modelling
 ```{r}
+# Changing to sum-to-zero contrast
+options(contrasts = c("contr.sum", "contr.poly"))
+
 model <- lmer(lint_kgha ~ treatment + (1|blocks), data = lint_yield)
 
 summary(model)
 ```
 
+
+
+### Checking Anova
+
 ```{r}
-Anova(model, type = 3)
+options(scipen = 999) # changing scientific notations to decimals
+anova <- Anova(model, type = 3) %>% 
+  broom::tidy() # making a dataframe of the anova
 ```
+
+```{r echo = F}
+kable(anova, format = "html", col.names = c("Terms", "Statistic", "Df", "p-value"), digits = 4,
+      align = "c", caption = "Table 4: Anova table") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
+                            wraptable_width = "float", position = "center")
+```
+
+
+
+```{r}
+rcbd_mix_resid <- augment(model) %>%
+  mutate(.studresid=rstudent(model))
+```
+
+### Checking the Model Assumptions 
+
+- Independence (no pattern)  
+- Variance homogeneity (homoscedasticity)  
+- Normality  
+- Outlier detection (< -3 or > 3)  
+
+#### Random effects are iid ~ N(0,var_a)  
+
+```{r}
+randeff_rep <- ranef(model)$blocks
+
+randeff_rep
+```
+
+For random effects with so few levels (i.e., 4 since that's the number of blocks), the QQ plot is one of the only ways to check for assumptions on random effects.  
+
+
+```{r, fig.height=6, fig.width=9}
+
+ggplot(randeff_rep, aes(sample=`(Intercept)`))+
+  stat_qq(  shape = 21,
+            fill = "purple", 
+            size = 3,
+            alpha = .7
+  )+
+  stat_qq_line()+
+  labs(x = "Theoretical quantile",
+       y = "Sample quantile")+
+  theme_bw()
+```
+**Nothing to worry here, especially since we only have 4 points**.  
+
+#### Independence, Homoscadecity and Outliers
+
+```{r, fig.height=6, fig.width=9}
+ggplot(rcbd_mix_resid, aes(x=.fitted, y=.studresid))+
+  geom_hline(yintercept = 0, color="red")+
+  geom_point(shape = 21,
+             fill = "purple", 
+             size = 3,
+             alpha = .7)+
+  geom_smooth()+
+  geom_hline(yintercept = c(-3,3), color = "red")+
+  theme_bw()
+```
+
+- **Independence: seems like there is a potential pattern, but since error bands comprise 0 on the y-axis, I'm not worried.**  
+
+- **Variance homoscedastic: seems constant across the x-axis.  ** 
+
+- **Outliers: nothing outside the -3,3 boundaries.  **
+
+
+```{r, fig.height=6, fig.width=9}
+ggplot(rcbd_mix_resid, aes(sample=.studresid))+
+  stat_qq(  shape = 21,
+            fill = "purple", 
+            size = 3,
+            alpha = .7
+  )+
+  stat_qq_line()+
+  labs(x = "Theoretical quantile",
+       y = "Sample quantile")+
+  theme_bw()
+```
+#### Normality of Resiudals
+
+```{r, fig.height=6, fig.width=9}
+ggplot(rcbd_mix_resid, aes(x=.studresid))+
+  geom_density(color = "black",
+               fill = "purple",
+               alpha = .7)+
+  scale_x_continuous(breaks = c(-3,0,3), limits = c(-3,3))+
+  theme_bw()
+
+```
+
+- **Normality : The residual mean are gathered towards to 0 and the distribution seems to be somewhat normal. **
+
+### Emmeans and Pairwise Comparison
 
 ```{r}
 emmeans <- emmeans(model, ~treatment)
 
 pwc <- cld(emmeans, adjust = "none",
-           reversed = T, Letters = letters) %>% 
+           reversed = T, Letters = letters) %>%  # reversing the pwc so letter sequence goes from high to low.
   as.data.frame() %>% 
   mutate(letters = trimws(.group))
 ```
+
+```{r echo = F}
+kable(pwc, format = "html", col.names = c("Treatment", "Emmean", "SE", "Df", "Lower CL", "Upper CL", "Group", "Letter"),
+      align = "c", caption = "Table 5: Pairwise comparison among the treatments where treatments sharing the same letters are statistically similar.") %>% 
+  kableExtra::kable_styling(full_width = F, font_size = 18, html_font = "sansserif", bootstrap_options = "striped", 
+                            wraptable_width = "float", position = "center")
+```
+
+**The treatments are significantly different from each other so pairwise comparison was performed to better understand which treatments were different among each other and which one was the best and worst among all. The treatments that share at least one same letter are statistically similar.**
+
+### Visualizing the data
 
 ```{r}
 lint_yield %>% 
@@ -224,7 +374,8 @@ lint_yield %>%
   labs(x = expression(bold(paste("Treatments (kg ha"^-1, ")"))),
        y = expression(bold(paste("Lint Yield (kg ha"^-1, ")"))),
        fill = "Treatments",
-       title = "Lint Yield Affected by N Treatments in\n Midville")+
+       title = "Lint Yield Affected by N Treatments in\n Midville",
+       caption = "Figure 1. Boxplots of lint yield across treatments, with distinct colors indicating different nitrogen (N) application rates. Mean differences were determined at a significance level of 5% using the Least Significant Difference test. Treatments that share the same letter are not significantly different.")+
   theme_gray()+
   scale_x_discrete(labels = c("0+0",
                               "112+0",
@@ -244,12 +395,102 @@ lint_yield %>%
         axis.title = element_text(size = 14),
         plot.title = element_text(size = 20, face = "bold", hjust = 0.5))
 
-ggsave("../output/midville_lint_yield.png",
-       height = 6, 
-       width = 8)
+# ggsave("../output/midville_lint_yield.png",
+#        height = 6, 
+#        width = 8)
 ```
 
-##Interpretation: 
+## Rates
+
+```{r}
+mid_w_info_f <- info_mid %>% 
+  mutate(sd_lbac = as.numeric(sd_lbac),
+  pp_kgha = as.integer(pp_lbac / 0.89), # converting preplant rate to kg/ha
+  sd_kgha = as.integer(sd_lbac/ 0.89), # converting side dress rates to kg/ha
+  trt = paste0(pp_kgha, "+", sd_kgha),
+  total_kgha = pp_kgha + sd_kgha) %>%
+  mutate(trt = case_when(
+    plots == 106 ~ "40+VRN",
+    plots == 203 ~ "40+VRN",
+    plots == 301 ~ "40+VRN",
+    plots == 407 ~ "40+VRN",
+    T ~ trt))
+```
+
+
+```{r fig.height=6, fig.width=9}
+vrn_only <- mid_w_info_f %>%
+  mutate(trt = factor(trt,
+                            levels = c("0+0",
+                                       "112+0",
+                                       "40+26",
+                                       "40+60",
+                                       "40+94",
+                                       "40+128",
+                                       "40+VRN"))) %>%
+  mutate(total_vrn = ifelse(trt != "40+VRN", NA, total_kgha))
+
+
+mid_w_info_f %>%
+  mutate(trt = factor(trt,
+                            levels = c("0+0",
+                                       "112+0",
+                                       "40+26",
+                                       "40+60",
+                                       "40+94",
+                                       "40+128",
+                                       "40+VRN"))) %>%
+  mutate(total_vrn = ifelse(trt != "40+VRN", NA, total_kgha)) %>% 
+  group_by(trt, pp_kgha) %>% 
+  summarise(total = as.integer(mean(total_kgha)),
+            sd_kgha = as.integer(mean(sd_kgha))) %>% 
+  pivot_longer(cols = contains("kgha")) %>% 
+  mutate(name = factor(name, level = c("sd_kgha", "pp_kgha"))) %>% 
+  ggplot(aes(x = trt, y = value))+
+  geom_col(aes(fill = name), 
+           width = 0.7, 
+           color = "black",
+           linewidth = .7) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#F0E442", "#009E73"),
+                    labels = c("Side-dress", "Pre-plant")) +
+  geom_segment(aes(x = trt, xend = trt, y = total - 2, yend = total +2))+
+  # theme_cleveland()+
+  labs(x = expression(bold(paste("Pre-plant + Side-dress Rate (kg N"~ha^-1, ")"))),
+       y = expression(bold(paste("Total applied N Rate (kg"~ha^-1, ")"))),
+       fill = "Application Timing",
+       title = "Fixed vs. Sensor-Based N Rates",
+       caption = "Figure 2. Total applied nitrogen (N) rate including at preplant and side-dress timings for different treatments. The recommended N rate according to\n Georgia Cotton Production Guideline (GCPG) is 134 kg N ha-1. ")+
+  geom_label(aes(label = paste0("Total: ", total, " kg/ha"),
+                 y = total + 8), size = 3, fill = "white")+
+  theme(legend.position = c(0.92,0.93),
+        axis.title = element_text(face = "bold", size = 12),
+        axis.text = element_text(size = 8),
+        legend.title = element_text(face = "bold"),
+        legend.key.size = unit(1, "cm"),
+        panel.background = element_rect(fill = "white"),
+        axis.title.y = element_text())+
+  geom_text(aes(label = value), position = position_stack(vjust = 0.5), size = 4.5)+
+  scale_y_continuous(breaks = seq(0,150, 25))+
+  theme_minimal() +
+  theme(
+    legend.position = c(0.13, 0.9),
+    legend.title = element_text(size = 13, face = "bold"),
+    legend.text = element_text(size = 11),
+    axis.text = element_text(size = 13),
+    axis.title = element_text(size = 15, face = "bold"),
+    plot.title = element_text(size = 18, face = "bold"),
+    plot.caption = element_text(hjust = 0),
+    legend.background = element_rect(fill = "gray86", color = NA)
+  )+
+  theme(plot.title = element_text(hjust = 0.5, size = 18),
+        panel.background = element_rect(fill = "gray80"),
+        panel.grid = element_blank())
+```
+
+
+## Interpretation of Result
+
+
 
 # Team work in GitHub  
 Whether you are working with your future-self or as duos, make sure to stage, commit, and push after finishing each of the sub-sections above. When committing, write commit messages that are short and descriptive (e.g., finished wrangling).  
@@ -269,7 +510,7 @@ Once you have developed all the code and answers, make sure to Render this quart
 - If it does not look professional for whatever reason, then fix the issue, re-render it, recheck.  
 - Only send me your work once your html file looks professional.  
 - Some potential issues you may encounter and how to fix them:   
-  - Some times your code may be creating a table output that is waaay to long and cumbersome to scroll through when rendered. If this is the case, make it more professional looking by using the `head()` function to only print the first handful of rows (instead of thousands of rows).  
+  - Some times your code may be creating a table output that is way to long and cumbersome to scroll through when rendered. If this is the case, make it more professional looking by using the `head()` function to only print the first handful of rows (instead of thousands of rows).  
   
   - **DO NOT** delete the file's heading levels (# and ##). They set up the proper heading 1 and 2 levels, and I use them to guide my grading.  
   
